@@ -18,9 +18,10 @@ class Blockchain {
 
     generateHash(block) {
         let hash = sha256(block.key);
-        while(!hash.startsWith("00000")) {
+        while(!hash.startsWith("000")) {
             block.nonce += 1;
             hash = sha256(block.key);
+            console.log(hash)
         }
         return hash;
     }
@@ -32,9 +33,7 @@ class Blockchain {
         block.index = this.blocks.length;
         block.previousHash = previousBlock.hash;
         block.hash = this.generateHash(block);   
-
         return block;
-
     }
 
     getPreviousBlock() {
